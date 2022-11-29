@@ -230,11 +230,24 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "request.user_agent"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 235
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 7,
         "x": 0,
         "y": 10
       },
@@ -322,12 +335,37 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.file_name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 193
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.file_sha256"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 544
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 17,
+        "x": 7,
         "y": 10
       },
       "id": 4,
@@ -359,7 +397,18 @@
                 "min_doc_count": "1",
                 "order": "desc",
                 "orderBy": "_term",
-                "size": "10"
+                "size": "20"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "santa_event.file_sha256",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "20"
               },
               "type": "terms"
             }
@@ -379,7 +428,7 @@
           "timeField": "created_at"
         }
       ],
-      "title": "Top 10 Allow Unknowns",
+      "title": "Top 20 Allow Unknown files",
       "type": "table"
     },
     {
@@ -485,13 +534,13 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Santa overview",
   "uid": "CEo6gWs7z",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
