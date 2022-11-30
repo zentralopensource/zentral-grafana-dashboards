@@ -29,7 +29,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.2.3"
+      "version": "9.2.6"
     },
     {
       "type": "datasource",
@@ -280,7 +280,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.2.6",
       "targets": [
         {
           "alias": "",
@@ -431,7 +431,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.2.6",
       "targets": [
         {
           "alias": "",
@@ -582,7 +582,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.2.6",
       "targets": [
         {
           "alias": "",
@@ -616,7 +616,7 @@
                 "min_doc_count": "1",
                 "order": "desc",
                 "orderBy": "_term",
-                "size": "10"
+                "size": "20"
               },
               "type": "terms"
             }
@@ -637,6 +637,37 @@
         }
       ],
       "title": "Top 20 Allow Unknown certificates",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Valid Until",
+            "binary": {
+              "left": "santa_event.signing_cert_0.valid_until",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "1000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Valid Until"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
       "type": "table"
     },
     {
@@ -708,7 +739,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.3",
+      "pluginVersion": "9.2.6",
       "targets": [
         {
           "alias": "",
@@ -854,6 +885,6 @@
   "timezone": "",
   "title": "Santa overview",
   "uid": "CEo6gWs7z",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
