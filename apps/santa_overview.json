@@ -29,7 +29,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.2.6"
+      "version": "9.2.3"
     },
     {
       "type": "datasource",
@@ -138,7 +138,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 24,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
@@ -239,7 +239,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 193
+                "value": 358
               }
             ]
           },
@@ -261,7 +261,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 9
       },
       "id": 4,
       "options": {
@@ -280,7 +280,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "alias": "",
@@ -390,7 +390,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 214
+                "value": 739
               }
             ]
           },
@@ -412,7 +412,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 17
       },
       "id": 9,
       "options": {
@@ -431,7 +431,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "alias": "",
@@ -541,7 +541,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 598
+                "value": 568
               }
             ]
           },
@@ -563,7 +563,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 25
       },
       "id": 10,
       "options": {
@@ -582,7 +582,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "alias": "",
@@ -689,7 +689,7 @@
         "h": 8,
         "w": 7,
         "x": 0,
-        "y": 50
+        "y": 35
       },
       "id": 6,
       "options": {
@@ -708,7 +708,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "9.2.3",
       "targets": [
         {
           "alias": "",
@@ -807,7 +807,7 @@
         "h": 8,
         "w": 17,
         "x": 7,
-        "y": 50
+        "y": 35
       },
       "id": 8,
       "options": {
@@ -854,6 +854,6 @@
   "timezone": "",
   "title": "Santa overview",
   "uid": "CEo6gWs7z",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
