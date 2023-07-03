@@ -29,7 +29,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.2.6"
+      "version": "10.0.1"
     },
     {
       "type": "datasource",
@@ -212,7 +212,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -239,7 +241,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 358
+                "value": 377
               }
             ]
           },
@@ -265,7 +267,9 @@
       },
       "id": 4,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -280,7 +284,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "alias": "",
@@ -339,7 +343,164 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.file_name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 193
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.file_sha256"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 544
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.signing_cert_0.org"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 739
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.team_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 381
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 9,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Count"
+          }
+        ]
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "santa_event.team_id",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "20"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "santa_event.signing_cert_0.org",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "20"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "${DS_ELASTICSEARCH}"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "type:santa_event AND santa_event.decision:ALLOW_UNKNOWN",
+          "refId": "A",
+          "timeField": "created_at"
+        }
+      ],
+      "title": "Top 20 Allow Unknown Team IDs",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "${DS_ELASTICSEARCH}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -405,6 +566,18 @@
                 "value": 160
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "santa_event.signing_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 384
+              }
+            ]
           }
         ]
       },
@@ -412,11 +585,13 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 25
       },
-      "id": 9,
+      "id": 11,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -431,13 +606,13 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "alias": "",
           "bucketAggs": [
             {
-              "field": "santa_event.team_id",
+              "field": "santa_event.signing_id",
               "id": "3",
               "settings": {
                 "min_doc_count": "1",
@@ -474,7 +649,7 @@
           "timeField": "created_at"
         }
       ],
-      "title": "Top 20 Allow Unknown Team IDs",
+      "title": "Top 20 Allow Unknown Signing IDs",
       "type": "table"
     },
     {
@@ -490,7 +665,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -563,11 +740,13 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 33
       },
       "id": 10,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -582,7 +761,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "alias": "",
@@ -683,7 +862,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -720,11 +901,13 @@
         "h": 8,
         "w": 7,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "id": 6,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -739,7 +922,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.6",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "alias": "",
@@ -838,7 +1021,7 @@
         "h": 8,
         "w": 17,
         "x": 7,
-        "y": 35
+        "y": 43
       },
       "id": 8,
       "options": {
@@ -870,8 +1053,8 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 37,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -885,6 +1068,6 @@
   "timezone": "",
   "title": "Santa overview",
   "uid": "CEo6gWs7z",
-  "version": 6,
+  "version": 2,
   "weekStart": ""
 }
