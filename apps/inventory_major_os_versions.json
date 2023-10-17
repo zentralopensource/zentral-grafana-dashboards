@@ -143,7 +143,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum without(minor, patch, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"})) * 100 / ignoring(major) group_left sum without(major, minor, patch, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"}) > $min_percent",
+          "expr": "(sum without(minor, patch, version, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"})) * 100 / ignoring(major) group_left sum without(major, minor, patch, version, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"}) > $min_percent",
           "interval": "",
           "legendFormat": "{{major}}",
           "range": true,
@@ -238,7 +238,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum without(minor, patch, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"})) > 0",
+          "expr": "(sum without(minor, patch, version, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"})) > 0",
           "interval": "",
           "legendFormat": "{{major}}",
           "range": true,
@@ -346,7 +346,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum without(minor, patch, build) (zentral_inventory_os_versions_bucket{le=\"$last_n_days\", source_name=\"$source_name\", name=\"$name\"})) * 100 / ignoring(name, major, minor, patch, build, platform) group_left sum without(machine_type, platform) (zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"}) > 0",
+          "expr": "(sum without(minor, patch, version, build) (zentral_inventory_os_versions_bucket{le=\"$last_n_days\", source_name=\"$source_name\", name=\"$name\"})) * 100 / ignoring(name, major, minor, patch, version, build, platform) group_left sum without(machine_type, platform) (zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"}) > 0",
           "interval": "",
           "legendFormat": "{{major}}",
           "range": true,
@@ -474,7 +474,7 @@
     ]
   },
   "time": {
-    "from": "now-3d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
