@@ -143,7 +143,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"} * 100 / ignoring(major, minor, patch, version, build) group_left sum without(major, minor, patch, version, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"}) > $min_percent",
+          "expr": "label_replace(label_replace(zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"}, \"minor\", \"0\", \"minor\", \"\"), \"patch\", \"0\", \"patch\", \"\") * 100 / ignoring(major, minor, patch, version, build) group_left sum without(major, minor, patch, version, build) (zentral_inventory_os_versions_bucket{name=\"$name\", le=\"$last_n_days\", source_name=\"$source_name\"}) > $min_percent",
           "legendFormat": "{{major}}.{{minor}}.{{patch}} ({{build}})",
           "range": true,
           "refId": "A"
