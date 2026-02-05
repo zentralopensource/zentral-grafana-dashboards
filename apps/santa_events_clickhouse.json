@@ -1,0 +1,235 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "clickhouse"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 28,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "dedupStrategy": "none",
+        "detailsMode": "inline",
+        "enableInfiniteScrolling": true,
+        "enableLogDetails": true,
+        "showControls": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "columns": [
+              {
+                "alias": "created_at",
+                "custom": false,
+                "name": "created_at",
+                "type": "DateTime64(9, 'UTC')"
+              },
+              {
+                "alias": "tags",
+                "custom": false,
+                "name": "tags",
+                "type": "Array(LowCardinality(String))"
+              },
+              {
+                "hint": "time",
+                "name": "created_at",
+                "type": "DateTime64(9, 'UTC')"
+              },
+              {
+                "alias": "tags",
+                "hint": "log_message",
+                "name": "tags",
+                "type": "Array(LowCardinality(String))"
+              },
+              {
+                "alias": "needles",
+                "hint": "log_labels",
+                "name": "needles",
+                "type": "Array(LowCardinality(String))"
+              }
+            ],
+            "database": "zentral",
+            "filters": [
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "hint": "time",
+                "key": "",
+                "operator": "WITH IN DASHBOARD TIME RANGE",
+                "type": "datetime"
+              },
+              {
+                "condition": "AND",
+                "filterType": "custom",
+                "hint": "log_level",
+                "key": "",
+                "operator": "IS ANYTHING",
+                "type": "string"
+              }
+            ],
+            "limit": 1000,
+            "meta": {
+              "logMessageLike": "",
+              "otelEnabled": false,
+              "otelVersion": "latest"
+            },
+            "mode": "list",
+            "orderBy": [
+              {
+                "default": true,
+                "dir": "DESC",
+                "hint": "time",
+                "name": ""
+              }
+            ],
+            "queryType": "logs",
+            "table": "zentral_events"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "clickhouse"
+          },
+          "editorType": "sql",
+          "format": 2,
+          "meta": {
+            "builderOptions": {
+              "columns": [
+                {
+                  "alias": "created_at",
+                  "custom": false,
+                  "name": "created_at",
+                  "type": "DateTime64(9, 'UTC')"
+                },
+                {
+                  "alias": "tags",
+                  "custom": false,
+                  "name": "tags",
+                  "type": "Array(LowCardinality(String))"
+                },
+                {
+                  "hint": "time",
+                  "name": "created_at",
+                  "type": "DateTime64(9, 'UTC')"
+                },
+                {
+                  "alias": "tags",
+                  "hint": "log_message",
+                  "name": "tags",
+                  "type": "Array(LowCardinality(String))"
+                },
+                {
+                  "alias": "needles",
+                  "hint": "log_labels",
+                  "name": "needles",
+                  "type": "Array(LowCardinality(String))"
+                }
+              ],
+              "database": "zentral",
+              "filters": [
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "hint": "time",
+                  "key": "",
+                  "operator": "WITH IN DASHBOARD TIME RANGE",
+                  "type": "datetime"
+                },
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "hint": "log_level",
+                  "key": "",
+                  "operator": "IS ANYTHING",
+                  "type": "string"
+                }
+              ],
+              "limit": 1000,
+              "meta": {
+                "logMessageLike": "",
+                "otelEnabled": false,
+                "otelVersion": "latest"
+              },
+              "mode": "list",
+              "orderBy": [
+                {
+                  "default": true,
+                  "dir": "DESC",
+                  "hint": "time",
+                  "name": ""
+                }
+              ],
+              "queryType": "logs",
+              "table": "zentral_events"
+            }
+          },
+          "pluginVersion": "4.12.0",
+          "queryType": "logs",
+          "rawSql": "SELECT \ncreated_at as \"timestamp\",\nconcat(\n  'sn=', serial_number,\n  ' dcsn=', payload.decision.:String,\n  ' sid=', coalesce(payload.signing_id.:String, 'UNKNOWN'),\n  ' fp=', payload.file_path.:String,\n  ' fn=', payload.file_name.:String\n) as title,\ncase\n  when payload.decision.:String LIKE 'BLOCK%' then 'error'\n  when payload.decision.:String = 'ALLOW_UNKNOWN' then 'warning'\n  else 'info'\nend as level,\nserial_number as serial_number,\npayload.decision.:String as decision,\npayload.signing_id.:String as signing_id,\npayload.file_path.:String as file_path,\npayload.file_name.:String as file_name\nFROM \"zentral\".\"zentral_events\"\nWHERE\ntype = 'santa_event'\nAND ( timestamp >= $__fromTime AND timestamp <= $__toTime )\nORDER BY timestamp\nDESC LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Santa events",
+      "type": "logs"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "baseFilters": [],
+        "datasource": {
+          "type": "grafana-clickhouse-datasource",
+          "uid": "clickhouse"
+        },
+        "filters": [],
+        "name": "Filters",
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Santa events",
+  "uid": "ercnhsg",
+  "version": 7
+}
