@@ -740,8 +740,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Osquery overview",
-  "uid": "Liu2_iynz",
+  "title": "Osquery overview (Elasticsearch)",
+  "uid": "osquery-overview-es",
   "version": 1,
   "weekStart": ""
 }

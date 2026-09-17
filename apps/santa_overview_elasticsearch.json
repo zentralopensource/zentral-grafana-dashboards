@@ -1066,8 +1066,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Santa overview",
-  "uid": "CEo6gWs7z",
+  "title": "Santa overview (Elasticsearch)",
+  "uid": "santa-overview-es",
   "version": 2,
   "weekStart": ""
 }
