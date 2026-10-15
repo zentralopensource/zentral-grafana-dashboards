@@ -249,7 +249,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(zentral_inventory_active_machines_bucket{source_name=\"$source_name\",le=\"$last_n_days\"})",
+          "expr": "sum(zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"} and on(platform) group by(platform) (zentral_inventory_os_versions_bucket{name=\"$name\", source_name=\"$source_name\", le=\"$last_n_days\"}))",
           "hide": false,
           "interval": "",
           "legendFormat": "fleet",
@@ -345,7 +345,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "label_replace(label_replace(zentral_inventory_os_versions_bucket{le=\"$last_n_days\", source_name=\"$source_name\", name=\"$name\"}, \"minor\", \"0\", \"minor\", \"\"), \"patch\", \"0\", \"patch\", \"\") * 100 / ignoring(name, major, minor, patch, version, build, platform) group_left sum without(machine_type, platform) (zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"}) > 0",
+          "expr": "label_replace(label_replace(zentral_inventory_os_versions_bucket{le=\"$last_n_days\", source_name=\"$source_name\", name=\"$name\"}, \"minor\", \"0\", \"minor\", \"\"), \"patch\", \"0\", \"patch\", \"\") * 100 / ignoring(name, major, minor, patch, version, build) group_left sum without(machine_type) (zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"}) > 0",
           "interval": "",
           "legendFormat": "{{major}}.{{minor}}.{{patch}} ({{build}})",
           "range": true,
