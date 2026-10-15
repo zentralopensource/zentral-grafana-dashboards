@@ -249,10 +249,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"} and on(platform) group by(platform) (zentral_inventory_os_versions_bucket{name=\"$name\", source_name=\"$source_name\", le=\"$last_n_days\"}))",
+          "expr": "sum by(platform) (zentral_inventory_active_machines_bucket{source_name=\"$source_name\", le=\"$last_n_days\"} and on(platform) group by(platform) (zentral_inventory_os_versions_bucket{name=\"$name\", source_name=\"$source_name\", le=\"$last_n_days\"}))",
           "hide": false,
           "interval": "",
-          "legendFormat": "fleet",
+          "legendFormat": "{{platform}} fleet",
           "range": true,
           "refId": "B"
         }
@@ -352,7 +352,7 @@
           "refId": "A"
         }
       ],
-      "title": "OS versions % fleet",
+      "title": "OS versions % platform fleet",
       "type": "timeseries"
     }
   ],
